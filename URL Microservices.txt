@@ -1,0 +1,16 @@
+http://localhost:8001/h2-console
+http://localhost:8001/currency-exchange/from/AUD/to/INR
+http://localhost:8001/currency-exchange/from/USD/to/INR
+http://localhost:8001/currency-exchange/from/EUR/to/INR
+http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
+http://localhost:8100/currency-conversion/from/AUD/to/INR/quantity/10
+http://localhost:8100/currency-conversion/from/EUR/to/INR/quantity/10
+http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
+http://localhost:8100/currency-conversion-feign/from/AUD/to/INR/quantity/10
+http://localhost:8100/currency-conversion-feign/from/EUR/to/INR/quantity/10
+http://localhost:8761/
+http://localhost:8765/currency-exchange/from/USD/to/INR
+http://localhost:8765/currency-exchange/from/AUD/to/INR
+http://localhost:8765/currency-exchange/from/EUR/to/INR
+http://localhost:8765/get
+http://localhost:8001/sample-api
