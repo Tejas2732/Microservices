@@ -51,7 +51,7 @@ http://localhost:8888/limits-service/default
 http://localhost:8888/limits-service/qa
 http://localhost:8888/limits-service/dev
 Currency Exchange Service
-http://localhost:8000/currency-exchange/from/USD/to/INR
+http://localhost:8001/currency-exchange/from/USD/to/INR
 Currency Conversion Service
 http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
 http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
@@ -367,7 +367,7 @@ http://localhost:8000/currency-exchange/from/USD/to/INR
    "from":"USD",
    "to":"INR",
    "conversionMultiple":65.00,
-   "environment":"8000 instance-id"
+   "environment":"8001 instance-id"
 }
 
 /currency-exchange-service/src/main/java/com/in28minutes/microservices/currencyexchangeservice/CurrencyExchange.java New
@@ -607,7 +607,7 @@ spring.datasource.url=jdbc:h2:mem:testdb
 spring.h2.console.enabled=true
 
 spring.application.name=currency-exchange
-server.port=8000
+server.port=8001
 spring.jpa.defer-datasource-initialization=true # For >2.5.0
 /currency-exchange-service/src/main/resources/data.sql New
 insert into currency_exchange
@@ -702,7 +702,7 @@ http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
   "conversionMultiple": 65.00,
   "quantity": 10,
   "totalCalculatedAmount": 650.00,
-  "environment": "8000 instance-id"
+  "environment": "8001 instance-id"
 }
 /currency-conversion-service/src/main/java/com/in28minutes/microservices/currencyconversionservice/CurrencyConversionController.java New
 package com.in28minutes.microservices.currencyconversionservice;
@@ -893,7 +893,7 @@ public class CurrencyConversionController {
                 currencyConversion.getEnvironment()+ " " + "rest client");
 		
 //		ResponseEntity<CurrencyConversion> responseEntity = new RestTemplate().getForEntity
-//		("http://localhost:8000/currency-exchange/from/{from}/to/{to}", 
+//		("http://localhost:8001/currency-exchange/from/{from}/to/{to}", 
 //				CurrencyConversion.class, uriVariables);
 //		
 //		CurrencyConversion currencyConversion = responseEntity.getBody();
@@ -930,7 +930,7 @@ If everything is fine
 
 If you still have a problem, post a question including all the details:
 
-(1) Responses from all 3 URLs - http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10, http://localhost:8000/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
+(1) Responses from all 3 URLs - http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10, http://localhost:8001/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
 
 (3) Start up logs of the each of the components to understand what's happening in the background!
 
@@ -1021,7 +1021,7 @@ eureka.instance.hostname=localhost
 
 (5) Ensure that you are using the right url - http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10
 
-(6) Ensure that you are able to hit the urls directly - http://localhost:8000/currency-exchange/from/USD/to/INR and http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
+(6) Ensure that you are able to hit the urls directly - http://localhost:8001/currency-exchange/from/USD/to/INR and http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
 
 (8) Try if it works when you include the following property in application.properties for currency-conversion-service and currency-exchange-service
 
@@ -1042,7 +1042,7 @@ If you still have a problem, post a question including all the details:
 
 (1) Screenshot of services registration with Eureka
 
-(2) Responses from all 3 URLs - http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10, http://localhost:8000/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
+(2) Responses from all 3 URLs - http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/10, http://localhost:8001/currency-exchange/from/EUR/to/INR and http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/10
 
 (3) Start up logs of the each of the components to understand what's happening in the background!
 
@@ -1121,7 +1121,7 @@ Step 22 - Load Balancing with Eureka, Feign & Spring Cloud LoadBalancer
 /currency-conversion-service/src/main/java/com/in28minutes/microservices/currencyconversionservice/CurrencyExchangeProxy.java Modified
 import org.springframework.cloud.openfeign.FeignClient;
 
-//@FeignClient(name="currency-exchange", url="localhost:8000")
+//@FeignClient(name="currency-exchange", url="localhost:8001")
 @FeignClient(name="currency-exchange")
 public interface CurrencyExchangeProxy {
 	
